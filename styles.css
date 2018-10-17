@@ -1,0 +1,23 @@
+th, td {
+    border: 1px solid black;
+}
+
+table {
+    margin: auto;
+    table-layout: fixed;
+    width: 45%;
+    height: 45%;
+}
+
+img {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+#buttons {
+      text-align: center;
+      margin: 2%;
+}
