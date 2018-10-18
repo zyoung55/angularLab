@@ -1,6 +1,7 @@
 var app = angular.module('myApp', [])
 .controller('myCtrl', function($scope) {
 
+    //TODO: make this a function
     $scope.zeroZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
     $scope.zeroOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
     $scope.zeroTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
@@ -20,8 +21,10 @@ var app = angular.module('myApp', [])
     
     
     $scope.array = ['https://www.nationalgeographic.com/content/dam/animals/2018/09/comedy-wildlife-awards-photos/comedy-wildlife-awards-squirel-stop.ngsversion.1537203605960.adapt.1900.1.jpg', 
-    'https://pbs.twimg.com/profile_images/378800000831249044/effb57c08b2f5783c686b589d84d2b92.jpeg', 'https://hounslowurbanfarm.co.uk/wp-content/uploads/2017/03/img-animal-Willow-the-Barn-Owl.jpg',
-    'http://www.top13.net/wp-content/uploads/2016/02/animal-love-3.jpg', 'http://chdanimalhusbandry.gov.in/img/13.jpg', 'https://metrouk2.files.wordpress.com/2018/06/4233a94b93ce00ce8274afe4c3b4a818.jpg?quality=80&strip=all&zoom=1&resize=644%2C427',
+    'https://pbs.twimg.com/profile_images/378800000831249044/effb57c08b2f5783c686b589d84d2b92.jpeg', 
+    'https://hounslowurbanfarm.co.uk/wp-content/uploads/2017/03/img-animal-Willow-the-Barn-Owl.jpg',
+    'http://www.top13.net/wp-content/uploads/2016/02/animal-love-3.jpg', 
+    'http://chdanimalhusbandry.gov.in/img/13.jpg', 'https://metrouk2.files.wordpress.com/2018/06/4233a94b93ce00ce8274afe4c3b4a818.jpg?quality=80&strip=all&zoom=1&resize=644%2C427',
     'https://img.buzzfeed.com/buzzfeed-static/static/enhanced/web03/2012/6/20/12/enhanced-buzz-13209-1340210795-17.jpg?downsize=700:*&output-format=auto&output-quality=auto', 
     'https://cdn.theatlantic.com/assets/media/img/photo/2018/02/animals-on-the-playing-field/a01_545766130/main_900.jpg?1517515869',
     'https://www.nationalgeographic.com/content/dam/animals/2018/09/comedy-wildlife-awards-photos/comedy-wildlife-awards-squirel-stop.ngsversion.1537203605960.adapt.1900.1.jpg', 
@@ -31,18 +34,21 @@ var app = angular.module('myApp', [])
     'https://cdn.theatlantic.com/assets/media/img/photo/2018/02/animals-on-the-playing-field/a01_545766130/main_900.jpg?1517515869'];
     
     $scope.numFlipped = 0;
-    $scope.firstFlipped = {index: "", pictureUrl: ""};
-    $scope.secondFlipped = {index: "", pictureUrl: ""};
+    $scope.firstFlipped = {index: -1, pictureUrl: ""};
+    $scope.secondFlipped = {index: -1, pictureUrl: ""};
     
     $scope.incrementNumFlipped = function(callbackOne) {
+        console.log("incrementNumFlipped(" + "***" + ");\n")
         if ($scope.numFlipped == 0 || $scope.numFlipped == 1) {
+            
              ++$scope.numFlipped;
         }
-        console.log("NumberFlipped:", $scope.numFlipped);
+        console.log("::NumberFlipped:", $scope.numFlipped);
         callbackOne(arguments[1], arguments[2]);
     }
     
     $scope.addToFlippedScopeValues = function(arrayIndex, value) {
+        console.log("addToFlippedScopeValues(" + arrayIndex + "," + value + ");\n")
         if ($scope.numFlipped == 1) {
             $scope.firstFlipped.index = arrayIndex;
             $scope.firstFlipped.pictureUrl = value;
@@ -51,19 +57,24 @@ var app = angular.module('myApp', [])
             $scope.secondFlipped.index = arrayIndex;
             $scope.secondFlipped.pictureUrl = value;
         }
-        console.log("firstFlipped:", $scope.firstFlipped);
-        console.log("secondFlipped", $scope.secondFlipped);
+        console.log("::firstFlipped:", $scope.firstFlipped);
+        console.log("::secondFlipped", $scope.secondFlipped);
     }
     
     $scope.checkPicture = function() {
+        console.log("checkPicture();");
+        if ($scope.numFlipped == 0) {
+            console.log("::NO pics selected");
+        } 
         if ($scope.numFlipped == 1) {
-            alert("One");
+            console.log("::only one pic selected");
         } 
         if ($scope.numFlipped == 2) {
-            alert("wowo"); 
-            console.log("Money!");
+            console.log("::two pics selected!");
             if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
-                alert("They matched! Great job!");
+                console.log("::They matched! Great job!");
+                //alert("They matched! Great job!");
+
                 if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
                     $scope.zeroZero = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
                     console.log("did i make it 1?");
@@ -116,8 +127,8 @@ var app = angular.module('myApp', [])
                 }
             }
             else {
-                alert("They didn't match :(. Try again!");
-                console.log("did i make it?");
+     //           alert("They didn't match :(. Try again!");
+                console.log("::didn't match");
                 if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
                     $scope.zeroZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                     console.log("did i make it 1?");
@@ -178,156 +189,109 @@ var app = angular.module('myApp', [])
     }
     
     $scope.reupdatePicture = function(updateScopeValue) {
-        console.log("hi");
+        console.log("reupdatePicture(" + updateScopeValue + ");");
     }
     
     $scope.flipOver = function(index) {
+        console.log("flipOver(" + index + ");")
+        
+        var arrIndex = Math.floor(index/10%10)*4 + Math.floor(index%10);
+        if ($scope.numFlipped == 2) {
+            console.log("::2 already flipped homie")
+            alert("!You can't flip more than two pictures!");
+            return;
+        }
+        
+        if($scope.firstFlipped.index == index){
+            console.log("::" + index + " clicked again");
+            return;
+        }
+        
+        
+    
         if (index == "00") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
-            $scope.zeroZero = $scope.array[0];
-            $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 0, $scope.array[0]);
+            $scope.zeroZero = $scope.array[arrIndex];//0];
+            $scope.incrementNumFlipped($scope.addToFlippedScopeValues, arrIndex, $scope.array[arrIndex]);//0, $scope.array[0]);
         }
         
         if (index == "01") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.zeroOne = $scope.array[1];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 1, $scope.array[1]);
         }
         
         if (index == "02") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.zeroTwo = $scope.array[2];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 2, $scope.array[2]);
         }
         
         if (index == "03") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.zeroThree = $scope.array[3];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 3, $scope.array[3]);
         }
         
         if (index == "10") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.oneZero = $scope.array[4];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 4, $scope.array[4]);
         }
         
         if (index == "11") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.oneOne = $scope.array[5];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 5, $scope.array[5]);
         }
         
         if (index == "12") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.oneTwo = $scope.array[6];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 6, $scope.array[6]);
         }
         
         if (index == "13") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
-            $scope.oneThree = $scope.array[7];
+             $scope.oneThree = $scope.array[7];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 7, $scope.array[7]);
         }
         
         if (index == "20") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.twoZero = $scope.array[8];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 8, $scope.array[8]);
         }
         
         if (index == "21") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.twoOne = $scope.array[9];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 9, $scope.array[9]);
         }
         
         if (index == "22") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
-            $scope.twoTwo = $scope.array[10];
+          $scope.twoTwo = $scope.array[10];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 10, $scope.array[10]);
         }
         
         if (index == "23") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.twoThree = $scope.array[11];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 11, $scope.array[11]);
         }
         
         if (index == "30") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.threeZero = $scope.array[12];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 12, $scope.array[12]);
         }
         
         if (index == "31") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.threeOne = $scope.array[13];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 13, $scope.array[13]);
         }
         
         if (index == "32") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.threeTwo = $scope.array[14];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 14, $scope.array[14]);
         }
         
         if (index == "33") {
-            if ($scope.numFlipped == 2) {
-                alert("You can't flip more than two pictures");
-                return;
-            }
             $scope.threeThree = $scope.array[15];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 15, $scope.array[15]);
         }
     }
     
     $scope.randomizePictures = function() {
+        console.log("randomizePictures();");
         var tempArray = [];
         var endIndex = array.length - 1;
         for (var i = 0; i < array.length / 2; ++i) {
@@ -335,6 +299,7 @@ var app = angular.module('myApp', [])
             tempArray[endIndex - i] = $scope.array[i]
         }
     }
+    
 })
 
 //Todo:
