@@ -97,7 +97,9 @@ var app = angular.module('myApp', [])
     
     $scope.setPics = function(pic){
         console.log("setPics()");
-        
+        $scope.setSinglePic($scope.secondFlipped.index);
+        $scope.sleep(1000);
+        //pic ='https://cdn.theatlantic.com/assets/media/img/photo/2018/02/animals-on-the-playing-field/a01_545766130/main_900.jpg?1517515869';// $scope.backPic;
         if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
             $scope.zeroZero = pic;
         }
@@ -152,27 +154,22 @@ var app = angular.module('myApp', [])
         console.log("checkPicture();");
         if ($scope.numFlipped == 0 || $scope.numFlipped == 1) 
             return;
-         
+
         if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
             $scope.doneArray.push($scope.firstFlipped.index);
             $scope.doneArray.push($scope.secondFlipped.index);
             $scope.match = true;
         }
         else {
-            //TODO
-            console.log("!");
-            console.log("@");
             $scope.match = false;
-        }
 
+        }
         $scope.setFlipOff();
     }
 
     $scope.setFlipOff = function(){
         console.log("setFlipOff();");
         if(!$scope.match){
-                $scope.sleep(1000);
-
             $scope.setPics($scope.backPic);
         }
         $scope.firstFlipped.pictureUrl = "";
@@ -180,8 +177,7 @@ var app = angular.module('myApp', [])
         $scope.firstFlipped.index = -1;
         $scope.secondFlipped.index = -1;
         $scope.numFlipped = 0;
-        console.log("setFlipOff returning");
-
+        
     }
     
     $scope.flipOverCheck = function(index){
@@ -197,13 +193,10 @@ var app = angular.module('myApp', [])
         return true;
     }
     
-    $scope.flipOver = function(index) {
-        console.log("flipOver(" + index + ");")
-        var arrIndex = Math.floor(index/10%10)*4 + Math.floor(index%10);
-        
-        if(!$scope.flipOverCheck(arrIndex))
-            return;
-        
+    $scope.setSinglePic = function(index){
+        console.log("setSinglePic(" + index);
+                index = Math.floor(index/10%10)*4 + Math.floor(index%10);
+
         if (index == "00") 
             $scope.zeroZero = $scope.array[0];
         if (index == "01") 
@@ -236,9 +229,18 @@ var app = angular.module('myApp', [])
             $scope.threeTwo = $scope.array[14];
         if (index == "33")
             $scope.threeThree = $scope.array[15];
+    }
+    
+    $scope.flipOver = function(index) {
+        console.log("flipOver(" + index + ");")
+        var arrIndex = Math.floor(index/10%10)*4 + Math.floor(index%10);
         
-        $scope.incrementNumFlipped($scope.addToFlippedScopeValues, arrIndex, $scope.array[arrIndex]);//0, $scope.array[0]);
+        if(!$scope.flipOverCheck(arrIndex))
+            return;
+         $scope.incrementNumFlipped($scope.addToFlippedScopeValues, arrIndex, $scope.array[arrIndex]);//0, $scope.array[0]);
         
+        $scope.setSinglePic(index);
+       
         if($scope.numFlipped == 2){
             $scope.checkPicture();
         }
