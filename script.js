@@ -1,26 +1,13 @@
 var app = angular.module('myApp', [])
 .controller('myCtrl', function($scope) {
 
-    //TODO: make this a function
-    $scope.zeroZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.zeroOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.zeroTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.zeroThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+
+    $scope.backPic = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+
+
     
     
-    $scope.newArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+    $scope.matchPic = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
     
     $scope.array = ['https://www.nationalgeographic.com/content/dam/animals/2018/09/comedy-wildlife-awards-photos/comedy-wildlife-awards-squirel-stop.ngsversion.1537203605960.adapt.1900.1.jpg', 
     'https://pbs.twimg.com/profile_images/378800000831249044/effb57c08b2f5783c686b589d84d2b92.jpeg', 
@@ -35,6 +22,10 @@ var app = angular.module('myApp', [])
     'https://img.buzzfeed.com/buzzfeed-static/static/enhanced/web03/2012/6/20/12/enhanced-buzz-13209-1340210795-17.jpg?downsize=700:*&output-format=auto&output-quality=auto', 
     'https://cdn.theatlantic.com/assets/media/img/photo/2018/02/animals-on-the-playing-field/a01_545766130/main_900.jpg?1517515869'];
     
+    
+    $scope.doneArray = [];
+    
+    
     $scope.numFlipped = 0;
     $scope.firstFlipped = {index: -1, pictureUrl: ""};
     $scope.secondFlipped = {index: -1, pictureUrl: ""};
@@ -42,8 +33,36 @@ var app = angular.module('myApp', [])
     
     $scope.init = function(){
         console.log("init();");
-        $scope.randomizePictures();
+        $scope.setAllOff();
+        $scope.firstFlipped.index = -1;
+        $scope.firstFlipped.pictureUrl = "";
+        $scope.secondFlipped.index = -1;
+        $scope.secondFlipped.pictureUrl = "";
+        $scope.numFlipped = 0
+     //   $scope.randomizePictures();
     }
+    
+    $scope.setAllOff = function(){
+        //TODO: make this a function
+    $scope.zeroZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.zeroOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.zeroTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.zeroThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.oneZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.oneOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.oneTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.oneThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.twoZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.twoOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.twoTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.twoThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.threeZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.threeOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.threeTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    $scope.threeThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+    }
+    
+    
     
     $scope.incrementNumFlipped = function(callbackOne) {
         console.log("incrementNumFlipped(" + "***" + ");\n")
@@ -68,6 +87,62 @@ var app = angular.module('myApp', [])
         console.log("::secondFlipped", $scope.secondFlipped);
     }
     
+    $scope.setMatched = function(){
+        console.log("setMatched();")
+
+       if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
+            $scope.zeroZero = $scope.matchPic;
+            console.log("did i make it 1?");
+        }
+        if ($scope.firstFlipped.index == 1 || $scope.secondFlipped.index == 1) {
+            $scope.zeroOne = $scope.matchPic;
+            console.log("did i make it 2?");
+        }
+        if ($scope.firstFlipped.index == 2 || $scope.secondFlipped.index == 2) {
+            $scope.zeroTwo = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 3 || $scope.secondFlipped.index == 3) {
+            $scope.zeroThree = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 4 || $scope.secondFlipped.index == 4) {
+            $scope.oneZero = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 5 || $scope.secondFlipped.index == 5) {
+            $scope.oneOne = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 6 || $scope.secondFlipped.index == 6) {
+            $scope.oneTwo = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 7 || $scope.secondFlipped.index == 7) {
+            $scope.oneThree = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 8 || $scope.secondFlipped.index == 8) {
+            $scope.twoZero = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 9 || $scope.secondFlipped.index == 9) {
+            $scope.twoOne = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 10 || $scope.secondFlipped.index == 10) {
+            $scope.twoTwo = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 11 || $scope.secondFlipped.index == 11) {
+            $scope.twoThree = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 12 || $scope.secondFlipped.index == 12) {
+            $scope.threeZero = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 13 || $scope.secondFlipped.index == 13) {
+            $scope.threeOne = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 14 || $scope.secondFlipped.index == 14) {
+            $scope.threeTwo = $scope.matchPic;
+        }
+        if ($scope.firstFlipped.index == 15 || $scope.secondFlipped.index == 15) {
+            $scope.threeThree = $scope.matchPic;
+        }
+    }
+    
+    
     $scope.checkPicture = function() {
         console.log("checkPicture();");
         if ($scope.numFlipped == 0) {
@@ -81,110 +156,66 @@ var app = angular.module('myApp', [])
             if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
                 console.log("::They matched! Great job!");
                 //alert("They matched! Great job!");
+            
+                $scope.doneArray.push($scope.firstFlipped.index);
+                $scope.doneArray.push($scope.secondFlipped.index);
 
-                if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
-                    $scope.zeroZero = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                    console.log("did i make it 1?");
-                }
-                if ($scope.firstFlipped.index == 1 || $scope.secondFlipped.index == 1) {
-                    $scope.zeroOne = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                    console.log("did i make it 2?");
-                }
-                if ($scope.firstFlipped.index == 2 || $scope.secondFlipped.index == 2) {
-                    $scope.zeroTwo = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 3 || $scope.secondFlipped.index == 3) {
-                    $scope.zeroThree = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 4 || $scope.secondFlipped.index == 4) {
-                    $scope.oneZero = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 5 || $scope.secondFlipped.index == 5) {
-                    $scope.oneOne = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 6 || $scope.secondFlipped.index == 6) {
-                    $scope.oneTwo = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 7 || $scope.secondFlipped.index == 7) {
-                    $scope.oneThree = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 8 || $scope.secondFlipped.index == 8) {
-                    $scope.twoZero = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 9 || $scope.secondFlipped.index == 9) {
-                    $scope.twoOne = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 10 || $scope.secondFlipped.index == 10) {
-                    $scope.twoTwo = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 11 || $scope.secondFlipped.index == 11) {
-                    $scope.twoThree = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 12 || $scope.secondFlipped.index == 12) {
-                    $scope.threeZero = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 13 || $scope.secondFlipped.index == 13) {
-                    $scope.threeOne = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 14 || $scope.secondFlipped.index == 14) {
-                    $scope.threeTwo = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
-                if ($scope.firstFlipped.index == 15 || $scope.secondFlipped.index == 15) {
-                    $scope.threeThree = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
-                }
+                $scope.setMatched();
+             
             }
             else {
+
      //           alert("They didn't match :(. Try again!");
                 console.log("::didn't match");
                 if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
-                    $scope.zeroZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.zeroZero = $scope.backPic;// $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                     console.log("did i make it 1?");
                 }
                 if ($scope.firstFlipped.index == 1 || $scope.secondFlipped.index == 1) {
-                    $scope.zeroOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.zeroOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                     console.log("did i make it 2?");
                 }
                 if ($scope.firstFlipped.index == 2 || $scope.secondFlipped.index == 2) {
-                    $scope.zeroTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.zeroTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 3 || $scope.secondFlipped.index == 3) {
-                    $scope.zeroThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.zeroThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 4 || $scope.secondFlipped.index == 4) {
-                    $scope.oneZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.oneZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 5 || $scope.secondFlipped.index == 5) {
-                    $scope.oneOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.oneOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 6 || $scope.secondFlipped.index == 6) {
-                    $scope.oneTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.oneTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 7 || $scope.secondFlipped.index == 7) {
-                    $scope.oneThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.oneThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 8 || $scope.secondFlipped.index == 8) {
-                    $scope.twoZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.twoZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 9 || $scope.secondFlipped.index == 9) {
-                    $scope.twoOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.twoOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 10 || $scope.secondFlipped.index == 10) {
-                    $scope.twoTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.twoTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 11 || $scope.secondFlipped.index == 11) {
-                    $scope.twoThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.twoThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 12 || $scope.secondFlipped.index == 12) {
-                    $scope.threeZero = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.threeZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 13 || $scope.secondFlipped.index == 13) {
-                    $scope.threeOne = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.threeOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 14 || $scope.secondFlipped.index == 14) {
-                    $scope.threeTwo = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.threeTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
                 if ($scope.firstFlipped.index == 15 || $scope.secondFlipped.index == 15) {
-                    $scope.threeThree = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+                    $scope.threeThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
                 }
             }
             $scope.firstFlipped.pictureUrl = "";
@@ -210,6 +241,10 @@ var app = angular.module('myApp', [])
             alert("!You can't flip more than two pictures!");
             return;
         }
+        
+        
+        
+        
         
         if($scope.firstFlipped.index == index){
             console.log("::" + index + " clicked again");
@@ -299,8 +334,7 @@ var app = angular.module('myApp', [])
     $scope.randomizePictures = function() {
         
         console.log("randomizePictures();");
-        console.log($scope.array);
-        
+
         var m = $scope.array.length;
         var i, t;
         
