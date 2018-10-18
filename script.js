@@ -1,12 +1,18 @@
+/*
+TODO:
+-add delay
+-double click already matched (last 3 rows?)
+-double click same tile (last 3 rows?)
+-make it cool when they win
+*/
+
+
+
 var app = angular.module('myApp', [])
 .controller('myCtrl', function($scope) {
 
 
     $scope.backPic = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-
-
-    
-    
     $scope.matchPic = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
     
     $scope.array = ['https://www.nationalgeographic.com/content/dam/animals/2018/09/comedy-wildlife-awards-photos/comedy-wildlife-awards-squirel-stop.ngsversion.1537203605960.adapt.1900.1.jpg', 
@@ -25,10 +31,10 @@ var app = angular.module('myApp', [])
     
     $scope.doneArray = [];
     
-    
     $scope.numFlipped = 0;
     $scope.firstFlipped = {index: -1, pictureUrl: ""};
     $scope.secondFlipped = {index: -1, pictureUrl: ""};
+    
     
     
     $scope.init = function(){
@@ -39,30 +45,37 @@ var app = angular.module('myApp', [])
         $scope.secondFlipped.index = -1;
         $scope.secondFlipped.pictureUrl = "";
         $scope.numFlipped = 0
-     //   $scope.randomizePictures();
+        $scope.doneArray = [];
+      $scope.randomizePictures(); //uncomment this line before turn in
     }
     
+    $scope.sleep = function (milliseconds) {
+        console.log("SLEEP();");
+      var start = new Date().getTime();
+      for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+          break;
+        }
+      }
+    }
     $scope.setAllOff = function(){
-        //TODO: make this a function
-    $scope.zeroZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.zeroOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.zeroTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.zeroThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.oneThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.twoThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-    $scope.threeThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
+        $scope.zeroZero = $scope.backPic;
+        $scope.zeroOne = $scope.backPic;
+        $scope.zeroTwo = $scope.backPic;
+        $scope.zeroThree = $scope.backPic;
+        $scope.oneZero = $scope.backPic;
+        $scope.oneOne = $scope.backPic;
+        $scope.oneTwo = $scope.backPic;
+        $scope.oneThree = $scope.backPic;
+        $scope.twoZero = $scope.backPic;
+        $scope.twoOne = $scope.backPic;
+        $scope.twoTwo = $scope.backPic;
+        $scope.twoThree = $scope.backPic;
+        $scope.threeZero = $scope.backPic;
+        $scope.threeOne = $scope.backPic;
+        $scope.threeTwo = $scope.backPic;
+        $scope.threeThree = $scope.backPic;
     }
-    
-    
     
     $scope.incrementNumFlipped = function(callbackOne) {
         console.log("incrementNumFlipped(" + "***" + ");\n")
@@ -72,7 +85,7 @@ var app = angular.module('myApp', [])
         console.log("::NumberFlipped:", $scope.numFlipped);
         callbackOne(arguments[1], arguments[2]); //what does this do?
     }
-    
+
     $scope.addToFlippedScopeValues = function(arrayIndex, value) {
         console.log("addToFlippedScopeValues(" + arrayIndex + "," + value + ");\n")
         if ($scope.numFlipped == 1) {
@@ -87,62 +100,60 @@ var app = angular.module('myApp', [])
         console.log("::secondFlipped", $scope.secondFlipped);
     }
     
-    $scope.setMatched = function(){
-        console.log("setMatched();")
-
-       if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
-            $scope.zeroZero = $scope.matchPic;
-            console.log("did i make it 1?");
+    $scope.setPics = function(pic){
+        console.log("setPics()");
+        
+        if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
+            $scope.zeroZero = pic;
         }
         if ($scope.firstFlipped.index == 1 || $scope.secondFlipped.index == 1) {
-            $scope.zeroOne = $scope.matchPic;
-            console.log("did i make it 2?");
+            $scope.zeroOne = pic;
         }
         if ($scope.firstFlipped.index == 2 || $scope.secondFlipped.index == 2) {
-            $scope.zeroTwo = $scope.matchPic;
+            $scope.zeroTwo = pic;
         }
         if ($scope.firstFlipped.index == 3 || $scope.secondFlipped.index == 3) {
-            $scope.zeroThree = $scope.matchPic;
+            $scope.zeroThree = pic;
         }
         if ($scope.firstFlipped.index == 4 || $scope.secondFlipped.index == 4) {
-            $scope.oneZero = $scope.matchPic;
+            $scope.oneZero = pic;
         }
         if ($scope.firstFlipped.index == 5 || $scope.secondFlipped.index == 5) {
-            $scope.oneOne = $scope.matchPic;
+            $scope.oneOne = pic;
         }
         if ($scope.firstFlipped.index == 6 || $scope.secondFlipped.index == 6) {
-            $scope.oneTwo = $scope.matchPic;
+            $scope.oneTwo = pic;
         }
         if ($scope.firstFlipped.index == 7 || $scope.secondFlipped.index == 7) {
-            $scope.oneThree = $scope.matchPic;
+            $scope.oneThree = pic;
         }
         if ($scope.firstFlipped.index == 8 || $scope.secondFlipped.index == 8) {
-            $scope.twoZero = $scope.matchPic;
+            $scope.twoZero = pic;
         }
         if ($scope.firstFlipped.index == 9 || $scope.secondFlipped.index == 9) {
-            $scope.twoOne = $scope.matchPic;
+            $scope.twoOne = pic;
         }
         if ($scope.firstFlipped.index == 10 || $scope.secondFlipped.index == 10) {
-            $scope.twoTwo = $scope.matchPic;
+            $scope.twoTwo = pic;
         }
         if ($scope.firstFlipped.index == 11 || $scope.secondFlipped.index == 11) {
-            $scope.twoThree = $scope.matchPic;
+            $scope.twoThree = pic;
         }
         if ($scope.firstFlipped.index == 12 || $scope.secondFlipped.index == 12) {
-            $scope.threeZero = $scope.matchPic;
+            $scope.threeZero = pic;
         }
         if ($scope.firstFlipped.index == 13 || $scope.secondFlipped.index == 13) {
-            $scope.threeOne = $scope.matchPic;
+            $scope.threeOne = pic;
         }
         if ($scope.firstFlipped.index == 14 || $scope.secondFlipped.index == 14) {
-            $scope.threeTwo = $scope.matchPic;
+            $scope.threeTwo = pic;
         }
         if ($scope.firstFlipped.index == 15 || $scope.secondFlipped.index == 15) {
-            $scope.threeThree = $scope.matchPic;
+            $scope.threeThree = pic;
         }
     }
-    
-    
+
+    //TODO: add delay
     $scope.checkPicture = function() {
         console.log("checkPicture();");
         if ($scope.numFlipped == 0) {
@@ -156,100 +167,56 @@ var app = angular.module('myApp', [])
             if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
                 console.log("::They matched! Great job!");
                 //alert("They matched! Great job!");
-            
                 $scope.doneArray.push($scope.firstFlipped.index);
                 $scope.doneArray.push($scope.secondFlipped.index);
-
-                $scope.setMatched();
-             
+                $scope.setPics($scope.matchPic);
             }
             else {
-
-     //           alert("They didn't match :(. Try again!");
+     //         alert("They didn't match :(. Try again!");
                 console.log("::didn't match");
-                if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) {
-                    $scope.zeroZero = $scope.backPic;// $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                    console.log("did i make it 1?");
-                }
-                if ($scope.firstFlipped.index == 1 || $scope.secondFlipped.index == 1) {
-                    $scope.zeroOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                    console.log("did i make it 2?");
-                }
-                if ($scope.firstFlipped.index == 2 || $scope.secondFlipped.index == 2) {
-                    $scope.zeroTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 3 || $scope.secondFlipped.index == 3) {
-                    $scope.zeroThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 4 || $scope.secondFlipped.index == 4) {
-                    $scope.oneZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 5 || $scope.secondFlipped.index == 5) {
-                    $scope.oneOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 6 || $scope.secondFlipped.index == 6) {
-                    $scope.oneTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 7 || $scope.secondFlipped.index == 7) {
-                    $scope.oneThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 8 || $scope.secondFlipped.index == 8) {
-                    $scope.twoZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 9 || $scope.secondFlipped.index == 9) {
-                    $scope.twoOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 10 || $scope.secondFlipped.index == 10) {
-                    $scope.twoTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 11 || $scope.secondFlipped.index == 11) {
-                    $scope.twoThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 12 || $scope.secondFlipped.index == 12) {
-                    $scope.threeZero = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 13 || $scope.secondFlipped.index == 13) {
-                    $scope.threeOne = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 14 || $scope.secondFlipped.index == 14) {
-                    $scope.threeTwo = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
-                if ($scope.firstFlipped.index == 15 || $scope.secondFlipped.index == 15) {
-                    $scope.threeThree = $scope.backPic;//"https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
-                }
+                console.log($scope.doneArray);
+                $scope.sleep(1000);
+                
+                $scope.setPics($scope.backPic);
+
             }
             $scope.firstFlipped.pictureUrl = "";
             $scope.secondFlipped.pictureUrl = "";
-            $scope.firstFlipped.index = "";
-            $scope.secondFlipped.index = "";
+            $scope.firstFlipped.index = -1;
+            $scope.secondFlipped.index = -1;
             $scope.numFlipped = 0;
         }
     }
-    
-    $scope.reupdatePicture = function(updateScopeValue) {
-        console.log("reupdatePicture(" + updateScopeValue + ");");
+
+    $scope.flipOverCheck = function(index){
+        console.log("flipOverCheck();")
+        if ($scope.numFlipped == 2) {
+            console.log("::2 already flipped homie")
+            return false;
+        }
+        if($scope.firstFlipped.index == index){
+            console.log("::" + index + " clicked again");
+            return false;
+        }
+        console.log($scope.doneArray);
+        for(var i = 0; i < $scope.doneArray.length; i++){
+            console.log(i + ":: " + $scope.doneArray[i]);
+            if(index == $scope.doneArray[i])
+                return false;
+        }
+        console.log("::ret true")
+        return true;
     }
     
     $scope.flipOver = function(index) {
-        
         console.log("flipOver(" + index + ");")
         
         var arrIndex = Math.floor(index/10%10)*4 + Math.floor(index%10);
         
-        if ($scope.numFlipped == 2) {
-            console.log("::2 already flipped homie")
-            alert("!You can't flip more than two pictures!");
+        if(!$scope.flipOverCheck(index))
             return;
-        }
         
-        
-        
-        
-        
-        if($scope.firstFlipped.index == index){
-            console.log("::" + index + " clicked again");
-            return;
-        }
+    
     
         if (index == "00") {
             $scope.zeroZero = $scope.array[arrIndex];//0];
@@ -329,8 +296,16 @@ var app = angular.module('myApp', [])
             $scope.threeThree = $scope.array[15];
             $scope.incrementNumFlipped($scope.addToFlippedScopeValues, 15, $scope.array[15]);
         }
+        
+        if($scope.numFlipped == 2)
+            $scope.checkPicture();
+            
+        console.log($scope.doneArray.length);
+        if($scope.doneArray.length >= 16){
+            $scope.win();            
+        }
+        
     }
-    
     $scope.randomizePictures = function() {
         
         console.log("randomizePictures();");
@@ -344,17 +319,20 @@ var app = angular.module('myApp', [])
             $scope.array[m] = $scope.array[i];
             $scope.array[i] = t;
         }
-        
-        m = $scope.array.length;
-        while(m){
-            i = Math.floor(Math.random() * m--);
-            t = $scope.array[m];
-            $scope.array[m] = $scope.array[i];
-            $scope.array[i] = t;
-        }
     }
     
+    $scope.win = function(){
+        alert("YOU WIN!");
+    }
+    
+    
 })
+
+
+
+
+
+
 
 //Todo:
 /*
