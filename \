@@ -39,12 +39,6 @@ var app = angular.module('myApp', [])
     $scope.firstFlipped = {index: -1, pictureUrl: ""};
     $scope.secondFlipped = {index: -1, pictureUrl: ""};
     
-    
-    $scope.init = function(){
-        console.log("init();");
-        $scope.randomizePictures();
-    }
-    
     $scope.incrementNumFlipped = function(callbackOne) {
         console.log("incrementNumFlipped(" + "***" + ");\n")
         if ($scope.numFlipped == 0 || $scope.numFlipped == 1) {
@@ -201,6 +195,7 @@ var app = angular.module('myApp', [])
     
     $scope.flipOver = function(index) {
         
+        $scope.randomizePictures();
         console.log("flipOver(" + index + ");")
         
         var arrIndex = Math.floor(index/10%10)*4 + Math.floor(index%10);
@@ -312,6 +307,7 @@ var app = angular.module('myApp', [])
         }
         
         m = $scope.array.length;
+
         while(m){
             i = Math.floor(Math.random() * m--);
             t = $scope.array[m];

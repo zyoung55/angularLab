@@ -6,10 +6,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="script.js"></script>
 </head>
-<body ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp" ng-controller="myCtrl" data-ng-init="init()">
     <h1>Matching Game</h1>
     <div id="buttons">
-        <button ng-app="randomizePictures()">New Game</button>
+        <button ng-click="init()" ng-app="randomizePictures()">New Game</button>
         <button ng-click="checkPicture()">Check if match</button>
     </div>
     <table>
