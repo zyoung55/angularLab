@@ -12,6 +12,23 @@ var app = angular.module('myApp', [])
     $scope.backPic = "https://my-brushes.s3.amazonaws.com/images/vector/412515/preview/bl-Background5.png?v=5";
     $scope.matchPic = "https://oceanexplorer.noaa.gov/facts/pacific-size.jpg";
     
+    $scope.zeroZero = $scope.backPic;
+    $scope.zeroOne = $scope.backPic;
+    $scope.zeroTwo = $scope.backPic;
+    $scope.zeroThree = $scope.backPic;
+    $scope.oneZero = $scope.backPic;
+    $scope.oneOne = $scope.backPic;
+    $scope.oneTwo = $scope.backPic;
+    $scope.oneThree = $scope.backPic;
+    $scope.twoZero = $scope.backPic;
+    $scope.twoOne = $scope.backPic;
+    $scope.twoTwo = $scope.backPic;
+    $scope.twoThree = $scope.backPic;
+    $scope.threeZero = $scope.backPic;
+    $scope.threeOne = $scope.backPic;
+    $scope.threeTwo = $scope.backPic;
+    $scope.threeThree = $scope.backPic;
+    
     $scope.array = [
     'https://www.nationalgeographic.com/content/dam/animals/2018/09/comedy-wildlife-awards-photos/comedy-wildlife-awards-squirel-stop.ngsversion.1537203605960.adapt.1900.1.jpg', 
     'https://pbs.twimg.com/profile_images/378800000831249044/effb57c08b2f5783c686b589d84d2b92.jpeg', 'https://hounslowurbanfarm.co.uk/wp-content/uploads/2017/03/img-animal-Willow-the-Barn-Owl.jpg',
@@ -71,19 +88,9 @@ var app = angular.module('myApp', [])
         }*/
     }
     
-    /** called ??*/
-    $scope.sleep = function (milliseconds) {
-        console.log("SLEEP();");
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds)
-                break;
-        }
-    }
 
     /** called from checkPicture() when two clicked DON'T match*/
     $scope.setPics = function(){
-        $scope.sleep(1000);
         var pic = $scope.backPic;
         console.log("setPics()");
         if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) 
@@ -136,13 +143,14 @@ var app = angular.module('myApp', [])
     */
     $scope.checkPicture = function() {
         console.log("checkPicture();");
-    
+
         if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
             $scope.doneArray.push($scope.firstFlipped.index);
             $scope.doneArray.push($scope.secondFlipped.index);
         }
-        else {
-            $scope.setPics();
+        else{
+            $scope.setSinglePicBack($scope.firstFlipped.index);
+            $scope.setSinglePicBack($scope.secondFlipped.index);
         }
 
         $scope.firstFlipped.pictureUrl = "";
@@ -150,6 +158,11 @@ var app = angular.module('myApp', [])
         $scope.firstFlipped.index = -1;
         $scope.secondFlipped.index = -1;
         $scope.numFlipped = 0;
+        
+        
+        if($scope.doneArray.length >= 16){
+            $scope.win();            
+        }
     }
     
     /** called from flipOver() 
@@ -189,10 +202,42 @@ var app = angular.module('myApp', [])
             $scope.threeTwo = $scope.array[14];
         if (index == "15")
             $scope.threeThree = $scope.array[15];
-        if($scope.numFlipped == 2){
-            console.log("###");
-        }
-            
+    }
+    
+    $scope.setSinglePicBack = function(index){
+        console.log("setSinglePic(" + index + ");");
+        if (index == "0") 
+            $scope.zeroZero = $scope.backPic;
+        if (index == "1") 
+            $scope.zeroOne = $scope.backPic;
+        if (index == "2") 
+            $scope.zeroTwo = $scope.backPic;
+        if (index == "3") 
+            $scope.zeroThree = $scope.backPic;
+        if (index == "4")
+            $scope.oneZero = $scope.backPic;
+        if (index == "5") 
+            $scope.oneOne = $scope.backPic;
+        if (index == "6") 
+            $scope.oneTwo = $scope.backPic;
+        if (index == "7") 
+            $scope.oneThree = $scope.backPic;
+        if (index == "8") 
+            $scope.twoZero = $scope.backPic;
+        if (index == "9")
+            $scope.twoOne = $scope.backPic;
+        if (index == "10")
+            $scope.twoTwo = $scope.backPic;
+        if (index == "11")
+            $scope.twoThree = $scope.backPic;
+        if (index == "12")
+            $scope.threeZero = $scope.backPic;
+        if (index == "13")
+            $scope.threeOne = $scope.backPic;
+        if (index == "14") 
+            $scope.threeTwo = $scope.backPic;
+        if (index == "15")
+            $scope.threeThree = $scope.backPic;
     }
     
     /** called from flipOver() 
@@ -210,18 +255,16 @@ var app = angular.module('myApp', [])
             if(index == $scope.doneArray[i])
                 return false;
         }
-        console.log("::true");
         return true;
     }
     
+  
     /** 
      * called from main(html on click) 
      * 
      * checks if can flip over
      * sets url/index of flipped (based on numFlipped)
-     * sets single pic @ given index
-     * if 2 pics selected, call check picture
-     * if 16 elements in done array, call win
+     * sets single pic @ given index   
     */
     $scope.flipOver = function(index) {
         console.log("flipOver(" + index + ");")
@@ -237,16 +280,10 @@ var app = angular.module('myApp', [])
             $scope.secondFlipped.pictureUrl = $scope.array[index];
             $scope.secondFlipped.index = index;
         }
-        console.log("::" + $scope.numFlipped);
         $scope.setSinglePic(index);
-        if($scope.numFlipped == 2){
-            $scope.checkPicture();
-        }
-        if($scope.doneArray.length >= 16){
-            $scope.win();            
-        }
+        console.log($scope.doneArray);
     }
-
+    
 })
 
 
