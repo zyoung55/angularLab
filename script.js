@@ -77,7 +77,7 @@ var app = angular.module('myApp', [])
         $scope.threeTwo = $scope.backPic;
         $scope.threeThree = $scope.backPic;
         
-        /*var m = $scope.array.length;
+        var m = $scope.array.length;
         var i, t;
         
         while(m){
@@ -85,7 +85,7 @@ var app = angular.module('myApp', [])
             t = $scope.array[m];
             $scope.array[m] = $scope.array[i];
             $scope.array[i] = t;
-        }*/
+        }
     }
     
 
