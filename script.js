@@ -52,7 +52,6 @@ var app = angular.module('myApp', [])
      * randomizes pictures behind each tile
     */
     $scope.init = function(){
-        console.log("init();");
         $scope.firstFlipped.index = -1;
         $scope.firstFlipped.pictureUrl = "";
         $scope.secondFlipped.index = -1;
@@ -77,7 +76,7 @@ var app = angular.module('myApp', [])
         $scope.threeTwo = $scope.backPic;
         $scope.threeThree = $scope.backPic;
         
-        /*var m = $scope.array.length;
+        var m = $scope.array.length;
         var i, t;
         
         while(m){
@@ -85,14 +84,13 @@ var app = angular.module('myApp', [])
             t = $scope.array[m];
             $scope.array[m] = $scope.array[i];
             $scope.array[i] = t;
-        }*/
+        }
     }
     
 
     /** called from checkPicture() when two clicked DON'T match*/
     $scope.setPics = function(){
         var pic = $scope.backPic;
-        console.log("setPics()");
         if ($scope.firstFlipped.index == 0 || $scope.secondFlipped.index == 0) 
             $scope.zeroZero = pic;
         if ($scope.firstFlipped.index == 1 || $scope.secondFlipped.index == 1) 
@@ -142,7 +140,6 @@ var app = angular.module('myApp', [])
      * sets all data members to defaults
     */
     $scope.checkPicture = function() {
-        console.log("checkPicture();");
 
         if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
             $scope.doneArray.push($scope.firstFlipped.index);
@@ -171,7 +168,6 @@ var app = angular.module('myApp', [])
      * sets clicked picture to front picture
     */
     $scope.setSinglePic = function(index){
-        console.log("setSinglePic(" + index + ");");
         if (index == "0") 
             $scope.zeroZero = $scope.array[0];
         if (index == "1") 
@@ -207,7 +203,6 @@ var app = angular.module('myApp', [])
     }
     
     $scope.setSinglePicBack = function(index){
-        console.log("setSinglePic(" + index + ");");
         if (index == "0") 
             $scope.zeroZero = $scope.backPic;
         if (index == "1") 
@@ -250,7 +245,6 @@ var app = angular.module('myApp', [])
      *  -already been matched
     */
     $scope.flipOverCheck = function(index){
-        console.log("flipOverCheck();")
         if ($scope.numFlipped == 2 || $scope.firstFlipped.index == index)
             return false;
         for(var i = 0; i < $scope.doneArray.length; i++){
@@ -269,7 +263,6 @@ var app = angular.module('myApp', [])
      * sets single pic @ given index   
     */
     $scope.flipOver = function(index) {
-        console.log("flipOver(" + index + ");")
 
         if(!$scope.flipOverCheck(index))
             return;
@@ -283,7 +276,6 @@ var app = angular.module('myApp', [])
             $scope.secondFlipped.index = index;
         }
         $scope.setSinglePic(index);
-        console.log($scope.doneArray);
     }
     
 })
