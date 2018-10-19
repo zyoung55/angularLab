@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> b4f1c33c85cd74bee389df996972b978bad76dfd
 /*
 TODO:
 -add delay
@@ -145,14 +149,20 @@ var app = angular.module('myApp', [])
         console.log("checkPicture();");
 
         if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
+<<<<<<< HEAD
+            alert("Good job! You got a match!")
+=======
+>>>>>>> b4f1c33c85cd74bee389df996972b978bad76dfd
             $scope.doneArray.push($scope.firstFlipped.index);
             $scope.doneArray.push($scope.secondFlipped.index);
-            alert("Great job! You found a match!");
         }
         else{
+<<<<<<< HEAD
+            alert("Sorry those two don't match. Try again!");
+=======
+>>>>>>> b4f1c33c85cd74bee389df996972b978bad76dfd
             $scope.setSinglePicBack($scope.firstFlipped.index);
             $scope.setSinglePicBack($scope.secondFlipped.index);
-            alert("Sorry those two don't match. Please try agian.");
         }
 
         $scope.firstFlipped.pictureUrl = "";
@@ -240,6 +250,7 @@ var app = angular.module('myApp', [])
             $scope.threeTwo = $scope.backPic;
         if (index == "15")
             $scope.threeThree = $scope.backPic;
+<<<<<<< HEAD
     }
     
     /** called from flipOver() 
@@ -287,3 +298,59 @@ var app = angular.module('myApp', [])
     }
     
 })
+=======
+    }
+    
+    /** called from flipOver() 
+     * checks if tile can be flipped
+     * cant if:
+     *  -same pic already clicked
+     *  -two pics already clicked
+     *  -already been matched
+    */
+    $scope.flipOverCheck = function(index){
+        console.log("flipOverCheck();")
+        if ($scope.numFlipped == 2 || $scope.firstFlipped.index == index)
+            return false;
+        for(var i = 0; i < $scope.doneArray.length; i++){
+            if(index == $scope.doneArray[i])
+                return false;
+        }
+        return true;
+    }
+    
+  
+    /** 
+     * called from main(html on click) 
+     * 
+     * checks if can flip over
+     * sets url/index of flipped (based on numFlipped)
+     * sets single pic @ given index   
+    */
+    $scope.flipOver = function(index) {
+        console.log("flipOver(" + index + ");")
+
+        if(!$scope.flipOverCheck(index))
+            return;
+        $scope.numFlipped++;
+        if($scope.numFlipped == 1){
+             $scope.firstFlipped.pictureUrl = $scope.array[index];
+             $scope.firstFlipped.index = index;
+        }
+        else if($scope.numFlipped == 2){
+            $scope.secondFlipped.pictureUrl = $scope.array[index];
+            $scope.secondFlipped.index = index;
+        }
+        $scope.setSinglePic(index);
+        console.log($scope.doneArray);
+    }
+    
+})
+
+
+
+
+
+
+
+>>>>>>> b4f1c33c85cd74bee389df996972b978bad76dfd

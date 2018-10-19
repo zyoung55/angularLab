@@ -1,3 +1,4 @@
+
 /*
 TODO:
 -add delay
@@ -145,14 +146,14 @@ var app = angular.module('myApp', [])
         console.log("checkPicture();");
 
         if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
+            alert("Good job! You got a match!")
             $scope.doneArray.push($scope.firstFlipped.index);
             $scope.doneArray.push($scope.secondFlipped.index);
-            alert("Great job! You found a match!");
         }
         else{
+            alert("Sorry those two don't match. Try again!");
             $scope.setSinglePicBack($scope.firstFlipped.index);
             $scope.setSinglePicBack($scope.secondFlipped.index);
-            alert("Sorry those two don't match. Please try agian.");
         }
 
         $scope.firstFlipped.pictureUrl = "";

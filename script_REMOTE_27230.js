@@ -147,12 +147,10 @@ var app = angular.module('myApp', [])
         if ($scope.firstFlipped.pictureUrl == $scope.secondFlipped.pictureUrl) {
             $scope.doneArray.push($scope.firstFlipped.index);
             $scope.doneArray.push($scope.secondFlipped.index);
-            alert("Great job! You found a match!");
         }
         else{
             $scope.setSinglePicBack($scope.firstFlipped.index);
             $scope.setSinglePicBack($scope.secondFlipped.index);
-            alert("Sorry those two don't match. Please try agian.");
         }
 
         $scope.firstFlipped.pictureUrl = "";
@@ -287,3 +285,10 @@ var app = angular.module('myApp', [])
     }
     
 })
+
+
+
+
+
+
+
