@@ -6,36 +6,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="script.js"></script>
 </head>
-<body ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp" ng-controller="myCtrl" data-ng-init="init()">
     <h1>Matching Game</h1>
     <div id="buttons">
-        <button ng-app="randomizePictures()">New Game</button>
-        <button ng-click="checkPicture()">Check if match</button>
+        <button ng-click="init()" ng-app="randomizePictures()">New Game</button>
+        <button ng-click="checkPicture()" ng-app="">Check Match</button>
+
     </div>
     <table>
         <tr>
-            <td id="00" ng-click="flipOver(00)"><img ng-src="{{zeroZero}}" alt="a picture"></td>
-            <td id="01" ng-click="flipOver(01)"><img ng-src="{{zeroOne}}" alt="a picture"></td>
-            <td id="02" ng-click="flipOver(02)"><img ng-src="{{zeroTwo}}" alt="a picture"></td>
-            <td id="03" ng-click="flipOver(03)"><img ng-src="{{zeroThree}}" alt="a picture"></td>
+            <td id="0" ng-click="flipOver(0)"><img ng-src="{{zeroZero}}" alt="a picture"></td>
+            <td id="1" ng-click="flipOver(1)"><img ng-src="{{zeroOne}}" alt="a picture"></td>
+            <td id="2" ng-click="flipOver(2)"><img ng-src="{{zeroTwo}}" alt="a picture"></td>
+            <td id="3" ng-click="flipOver(3)"><img ng-src="{{zeroThree}}" alt="a picture"></td>
         </tr>
         <tr>
-            <td id="10" ng-click="flipOver(10)"><img ng-src="{{oneZero}}" alt="a picture"></td>
-            <td id="11" ng-click="flipOver(11)"><img ng-src="{{oneOne}}" alt="a picture"></td>
-            <td id="12" ng-click="flipOver(12)"><img ng-src="{{oneTwo}}" alt="a picture"></td>
-            <td id="13" ng-click="flipOver(13)"><img ng-src="{{oneThree}}" alt="a picture"></td>
+            <td id="4" ng-click="flipOver(4)"><img ng-src="{{oneZero}}" alt="a picture"></td>
+            <td id="5" ng-click="flipOver(5)"><img ng-src="{{oneOne}}" alt="a picture"></td>
+            <td id="6" ng-click="flipOver(6)"><img ng-src="{{oneTwo}}" alt="a picture"></td>
+            <td id="7" ng-click="flipOver(7)"><img ng-src="{{oneThree}}" alt="a picture"></td>
         </tr>
         <tr>
-            <td id="20" ng-click="flipOver(20)"><img ng-src="{{twoZero}}" alt="a picture"></td>
-            <td id="21" ng-click="flipOver(21)"><img ng-src="{{twoOne}}" alt="a picture"></td>
-            <td id="22" ng-click="flipOver(22)"><img ng-src="{{twoTwo}}" alt="a picture"></td>
-            <td id="23" ng-click="flipOver(23)"><img ng-src="{{twoThree}}" alt="a picture"></td>
+            <td id="8" ng-click="flipOver(8)"><img ng-src="{{twoZero}}" alt="a picture"></td>
+            <td id="9" ng-click="flipOver(9)"><img ng-src="{{twoOne}}" alt="a picture"></td>
+            <td id="10" ng-click="flipOver(10)"><img ng-src="{{twoTwo}}" alt="a picture"></td>
+            <td id="11" ng-click="flipOver(11)"><img ng-src="{{twoThree}}" alt="a picture"></td>
         </tr>
         <tr>
-            <td id="30" ng-click="flipOver(30)"><img ng-src="{{threeZero}}" alt="a picture"></td>
-            <td id="31" ng-click="flipOver(31)"><img ng-src="{{threeOne}}" alt="a picture"></td>
-            <td id="32" ng-click="flipOver(32)"><img ng-src="{{threeTwo}}" alt="a picture"></td>
-            <td id="33" ng-click="flipOver(33)"><img ng-src="{{threeThree}}" alt="a picture"></td>
+            <td id="12" ng-click="flipOver(12)"><img ng-src="{{threeZero}}" alt="a picture"></td>
+            <td id="13" ng-click="flipOver(13)"><img ng-src="{{threeOne}}" alt="a picture"></td>
+            <td id="14" ng-click="flipOver(14)"><img ng-src="{{threeTwo}}" alt="a picture"></td>
+            <td id="15" ng-click="flipOver(15)"><img ng-src="{{threeThree}}" alt="a picture"></td>
         </tr>
     </table>
 </body>

@@ -1,3 +1,10 @@
+h1 {
+    background-color: #5CA3BD;
+    color: white;
+    border: solid black 3px;
+    text-align: center;
+}
+
 th, td {
     border: 1px solid black;
 }
@@ -6,18 +13,21 @@ table {
     margin: auto;
     table-layout: fixed;
     width: 45%;
-    height: 45%;
 }
 
 img {
     width: 100%;
 }
 
-h1 {
-    text-align: center;
-}
-
 #buttons {
       text-align: center;
       margin: 2%;
+}
+
+button {
+    width: 10%;
+    background-color: #5CA3BD;
+    border: solid 1px black;
+    color: white;
+    height: 40px;
 }
